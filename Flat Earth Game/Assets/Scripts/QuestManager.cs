@@ -13,9 +13,8 @@ public class QuestManager : MonoBehaviour {
 	public void createNewQuest(string quest,List<string> objectives)
 	{
 		currentQuest = quest;
-		objectives.Clear ();
-		objectiveStatuses.Clear();
 		this.objectives = objectives;
+		this.objectiveStatuses = new List<bool> ();
 
 		for(int i=0; i<objectives.Count; i++)
 		{
@@ -34,7 +33,7 @@ public class QuestManager : MonoBehaviour {
 				finished++;
 			}
 		}
-		return Mathf.Ceil(finished / this.objectiveStatuses.Count);
+		return (int)(Mathf.Ceil(finished / this.objectiveStatuses.Count));
 	}
 
 	// Gets objectives title and new status to change the old status
