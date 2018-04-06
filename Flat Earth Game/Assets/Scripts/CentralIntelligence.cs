@@ -19,7 +19,7 @@ public class CentralIntelligence : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (agents.Length < 150) 
+		if (agents.Length < 250) 
 		{
 			Instantiate (agentPrefab, new Vector3 ((float)128.6, (float)0.83333,(float) 35.61394),Quaternion.identity);
 			agents = GameObject.FindGameObjectsWithTag ("EnemyAgent");
