@@ -8,6 +8,22 @@ public class AgentFSM : MonoBehaviour {
 	int lastDamageAnimation = -1;
 	private Animator animator;
 
+	public void evaluateState(Vector3 target){
+		float distance = Vector3.Distance (target, transform.position);
+		if (distance > 50) {
+			Walk ();
+		}else if(distance > 10 && distance <= 50) {
+			Run ();
+		} else {
+			// Panaxas comes here
+			// Add connections to your fighting scene here
+			// Feel free to use any other animations instead of attack() 
+			// Look at the entire script
+			// NOTE: ENEMIES SHOULD DIE EASYLY (MAYBE JUST A COUPLE OF TURTLE SHOTS)
+			Attack ();
+		}
+	}
+
 	void Awake () {
 		animator = GetComponent<Animator> ();
 	}
@@ -24,7 +40,7 @@ public class AgentFSM : MonoBehaviour {
 
 	public void Run () {
 		animator.SetBool("Aiming", false);
-		animator.SetFloat ("Speed", 1f);
+		animator.SetFloat ("Speed", 4f);
 	}
 
 	public void Attack () {
@@ -63,8 +79,4 @@ public class AgentFSM : MonoBehaviour {
 		animator.SetBool("Aiming", true);
 	}
 
-	public void Sitting () {
-		animator.SetBool ("Squat", !animator.GetBool("Squat"));
-		animator.SetBool("Aiming", false);
-	}
 }
