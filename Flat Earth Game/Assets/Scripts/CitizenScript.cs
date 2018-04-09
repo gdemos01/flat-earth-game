@@ -13,8 +13,6 @@ public class CitizenScript : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-
-		print("THISSSSSSSSSSSSSSSSSSSS: "+animator.GetBool ("Walk"));
 		animator.SetBool ("Walk", true);
 	}
 }
