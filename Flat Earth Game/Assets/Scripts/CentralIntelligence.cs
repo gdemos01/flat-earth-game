@@ -18,9 +18,11 @@ public class CentralIntelligence : MonoBehaviour {
 	void Start () {
 		questManager = GameObject.Find ("QuestManager").GetComponent<QuestManager> ();
 		// The creation of the quest here is temporary
-		List<string> l = new List<string> ();
-		l.Add ("hehe");
-		questManager.createNewQuest ("lol", l);
+		List<string> objectives = new List<string> ();
+		objectives.Add ("Q1");
+		objectives.Add ("Q2");
+		objectives.Add ("Q3");
+		questManager.createNewQuest ("Quest", objectives);
 		timeInGame = 1;
 	}
 

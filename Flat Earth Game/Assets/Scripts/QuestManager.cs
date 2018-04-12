@@ -33,7 +33,7 @@ public class QuestManager : MonoBehaviour {
 				finished++;
 			}
 		}
-		return (int)(Mathf.Ceil(finished / this.objectiveStatuses.Count));
+		return (int)((finished*100/ this.objectiveStatuses.Count)+1);
 	}
 
 	// Gets objectives title and new status to change the old status
