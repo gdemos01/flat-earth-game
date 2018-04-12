@@ -7,11 +7,14 @@ public class CentralIntelligence : MonoBehaviour {
 
 	public GameObject agentPrefab;
 	public GameObject[] agents;
+	public GameObject[] cars;
 	public QuestManager questManager;
 	public AgentFSM states;
 	private Vector3 destinationPoint;
 	private NavMeshAgent meshAgent;
 	private int timeInGame;
+	private int carsLeft;
+	private Transform startMarker;
 
 
 	// Use this for initialization
@@ -24,6 +27,8 @@ public class CentralIntelligence : MonoBehaviour {
 		objectives.Add ("Q3");
 		questManager.createNewQuest ("Quest", objectives);
 		timeInGame = 1;
+		carsLeft = 0;
+		startMarker = GameObject.Find ("StartMarker").GetComponent<Transform> ();
 	}
 
 	// Spanws a new agent at x,y,z
@@ -34,6 +39,12 @@ public class CentralIntelligence : MonoBehaviour {
 		
 	// Update is called once per frame
 	void Update () {
+
+		// CARS
+		if (timeInGame % 140 == 0 && carsLeft < 4){
+			Instantiate (cars [carsLeft], startMarker.position, cars[carsLeft].transform.rotation);
+			carsLeft++;
+		}
 
 		// RULE BASED A.I.
 		timeInGame++;
