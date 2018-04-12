@@ -41,7 +41,7 @@ public class CentralIntelligence : MonoBehaviour {
 	void Update () {
 
 		// CARS
-		if (timeInGame % 140 == 0 && carsLeft < 4){
+		if (timeInGame % 220 == 0 && carsLeft < 3){
 			Instantiate (cars [carsLeft], startMarker.position, cars[carsLeft].transform.rotation);
 			carsLeft++;
 		}
