@@ -2,10 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/**
+ * Dialogue Class that acts as a Unity Component
+ */ 
 [System.Serializable]
 public class Dialogue {
 
-	public string name;
+    [TextArea(3, 10)]
+    public string[] name;
 
 	[TextArea(3, 10)]
 	public string[] sentences;

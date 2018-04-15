@@ -2,7 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MrsMayorTrigger : MonoBehaviour {
+/** 
+ * DialogueObjectTrigger Class need to be assinged on an object with a defined box collider
+ */
+public class DialogueObjectTrigger : MonoBehaviour {
 
     public Dialogue dialogue;
 
@@ -18,8 +21,9 @@ public class MrsMayorTrigger : MonoBehaviour {
 
 private void OnTriggerStay(Collider col)
     {
-        if (col.gameObject.tag == "Player" && Input.GetKey(KeyCode.E))
+        if (col.gameObject.tag == "Player" && Input.GetKey(KeyCode.E) && FindObjectOfType<DialogueManager>().IsTriggered()==false)
         {
+            FindObjectOfType<DialogueManager>().setTriggered(true);
             FindObjectOfType<DialogueManager>().StartDialogue(dialogue);
         }
     }
@@ -28,6 +32,7 @@ private void OnTriggerStay(Collider col)
     {
         if (col.gameObject.tag == "Player")
         {
+            FindObjectOfType<DialogueManager>().setTriggered(false);
             FindObjectOfType<DialogueManager>().EndDialogue();
         }
     }

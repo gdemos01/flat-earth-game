@@ -10,42 +10,63 @@ public class DialogueManager : MonoBehaviour {
 
 	public Animator animator;
 
+    private Queue<string> names;
 	private Queue<string> sentences;
+
+    private bool isTriggered;
 
 	// Use this for initialization
 	void Start () {
+        isTriggered = false;
+        names = new Queue<string>();
 		sentences = new Queue<string>();
 	}
 
 	public void StartDialogue (Dialogue dialogue)
 	{
-		animator.SetBool("IsOpen", true);
+        //Call the dialogue box on screen
+        animator.SetBool("IsOpen", true);
 
-		nameText.text = dialogue.name;
+        //Initialize names into a queue
+        names.Clear();
 
+        foreach(string name in dialogue.name)
+        {
+            names.Enqueue(name);
+        }
+
+        //Initialize sentences into a queue
 		sentences.Clear();
 
-		foreach (string sentence in dialogue.sentences)
+        foreach (string sentence in dialogue.sentences)
 		{
-			sentences.Enqueue(sentence);
+            sentences.Enqueue(sentence);
 		}
 
 		DisplayNextSentence();
-	}
+    }
 
 	public void DisplayNextSentence ()
 	{
+        //if there are no more sentences
 		if (sentences.Count == 0)
 		{
 			EndDialogue();
 			return;
 		}
+        
+        //Change Actor Name
+        nameText.text = names.Dequeue();
 
-		string sentence = sentences.Dequeue();
+        //Change Talk
+        string sentence = sentences.Dequeue();
 		StopAllCoroutines();
 		StartCoroutine(TypeSentence(sentence));
 	}
 
+    /**
+     * Talk animation
+     */
 	IEnumerator TypeSentence (string sentence)
 	{
 		dialogueText.text = "";
@@ -56,9 +77,35 @@ public class DialogueManager : MonoBehaviour {
 		}
 	}
 
+    /* End conversation dialogue
+     */
 	public void EndDialogue()
 	{
 		animator.SetBool("IsOpen", false);
-	}
+        isTriggered = false;
+    }
+
+    
+    void FixedUpdate()
+    {
+        /**
+        * Press R instead of continue>> button on screen
+        * fordisplaying the next sentence
+        */
+        if (Input.GetKey(KeyCode.R) && isTriggered)
+        {
+            DisplayNextSentence();
+        }
+    }
+
+    public void setTriggered(bool value)
+    {
+        isTriggered = value;
+    }
+
+    public bool IsTriggered()
+    {
+        return isTriggered;
+    }
 
 }
