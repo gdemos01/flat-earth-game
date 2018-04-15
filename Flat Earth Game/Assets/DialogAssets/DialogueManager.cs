@@ -92,7 +92,7 @@ public class DialogueManager : MonoBehaviour {
         * Press R instead of continue>> button on screen
         * fordisplaying the next sentence
         */
-        if (Input.GetKey(KeyCode.R) && isTriggered)
+        if (Input.GetKeyDown(KeyCode.R) && isTriggered)
         {
             DisplayNextSentence();
         }
