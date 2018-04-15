@@ -15,7 +15,7 @@ public class bigdoorscript : MonoBehaviour
         animator = GetComponent<Animator>();
     }
 
-    private void OnTriggerEnter(Collider col)
+    private void OnTriggerStay(Collider col)
     {
         if (col.gameObject.tag == "Player")
         {
