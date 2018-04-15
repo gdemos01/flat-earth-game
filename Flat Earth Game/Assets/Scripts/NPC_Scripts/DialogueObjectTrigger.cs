@@ -21,7 +21,7 @@ public class DialogueObjectTrigger : MonoBehaviour {
 
 private void OnTriggerStay(Collider col)
     {
-        if (col.gameObject.tag == "Player" && Input.GetKey(KeyCode.E) && FindObjectOfType<DialogueManager>().IsTriggered()==false)
+		if (col.gameObject.tag == "Player" && Input.GetKey(KeyCode.E) && FindObjectOfType<DialogueManager>().IsTriggered()==false)
         {
             FindObjectOfType<DialogueManager>().setTriggered(true);
             FindObjectOfType<DialogueManager>().StartDialogue(dialogue);
@@ -44,6 +44,5 @@ private void OnTriggerStay(Collider col)
 	
 	// Update is called once per frame
 	void Update () {
-		
 	}
 }

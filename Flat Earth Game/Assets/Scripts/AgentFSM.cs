@@ -12,8 +12,9 @@ public class AgentFSM : MonoBehaviour {
 		float distance = Vector3.Distance (target, transform.position);
 		if (distance > 50) {
 			Walk ();
-		}else if(distance > 10 && distance <= 50) {
+		}else if(distance > 1 && distance <= 50) {
 			Run ();
+			print (distance);
 		} else {
 			// Panaxas comes here
 			// Add connections to your fighting scene here
