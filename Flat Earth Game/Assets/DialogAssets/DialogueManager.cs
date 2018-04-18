@@ -55,6 +55,7 @@ public class DialogueManager : MonoBehaviour {
 			return;
 		}
         
+
         //Change Actor Name
         nameText.text = names.Dequeue();
 
@@ -86,7 +87,7 @@ public class DialogueManager : MonoBehaviour {
     }
 
     
-    void FixedUpdate()
+    void Update()
     {
         /**
         * Press R instead of continue>> button on screen
