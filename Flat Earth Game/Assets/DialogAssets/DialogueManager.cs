@@ -7,7 +7,8 @@ public class DialogueManager : MonoBehaviour {
 
 	public Text nameText;
 	public Text dialogueText;
-
+	public bool dialogueBegan;
+	public bool dialogueFinishedEntierly;
 	public Animator animator;
 
     private Queue<string> names;
@@ -20,10 +21,17 @@ public class DialogueManager : MonoBehaviour {
         isTriggered = false;
         names = new Queue<string>();
 		sentences = new Queue<string>();
+		dialogueBegan = false;
+		dialogueFinishedEntierly = false;
+
 	}
 
 	public void StartDialogue (Dialogue dialogue)
 	{
+		// Notify everyone that a dialogue has began
+		dialogueBegan = true;
+		dialogueFinishedEntierly = false;
+
         //Call the dialogue box on screen
         animator.SetBool("IsOpen", true);
 
@@ -51,6 +59,8 @@ public class DialogueManager : MonoBehaviour {
         //if there are no more sentences
 		if (sentences.Count == 0)
 		{
+			// Notify everyone that the dialog has finished entierly
+			dialogueFinishedEntierly = true;
 			EndDialogue();
 			return;
 		}

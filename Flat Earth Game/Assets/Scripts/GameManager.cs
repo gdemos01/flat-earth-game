@@ -12,6 +12,7 @@ public class GameManager : MonoBehaviour {
 	public GameObject Talf;
 	private bool useCamera;
 	public AudioSource shutter;
+	public AudioSource signature;
 	bool approachedQuest;
 
 	// Use this for initialization
@@ -44,6 +45,7 @@ public class GameManager : MonoBehaviour {
 			photo.gameObject.SetActive (useCamera);
 			main.gameObject.SetActive (!useCamera);
 			cameraFrame.SetActive (useCamera);
+
 		}	
 
 		if (Input.GetKeyDown (KeyCode.E) && useCamera) {
@@ -54,6 +56,15 @@ public class GameManager : MonoBehaviour {
 				print (questManager.getPercentageFinished ());
 			}
 			shutter.Play();
+		}
+
+		// Check for Q3
+		DialogueManager dm = GameObject.Find("DialogueManager").GetComponent<DialogueManager>();
+		if (dm.dialogueBegan && dm.dialogueFinishedEntierly){
+			questManager.changeObjectiveStatus ("Q3", true);
+			signature.Play ();
+			print ("Congratulations! You completed the Q3 objective");
+			dm.dialogueBegan = false;
 		}
 	}
 		

@@ -29,6 +29,12 @@ public class OnScreenMessageTrigger : MonoBehaviour {
         }
     }
 
+	public void displayMessage(string msg){
+		onScreenMessage.setOnScreenMessage (msg);
+		FindObjectOfType<MessageBoxManager> ().StartOnScreenMessage (onScreenMessage);
+	}
+
+
     // Use this for initialization
     void Start()
     {
