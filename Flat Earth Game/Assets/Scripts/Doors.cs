@@ -18,7 +18,7 @@ public class Doors : MonoBehaviour {
         if(col.gameObject.tag == "Player")
         {
             doorOpen = true;
-            DoorAction("open");
+            DoorAction("Open");
         }
     }
 
@@ -27,7 +27,7 @@ public class Doors : MonoBehaviour {
         if (doorOpen)
         {
             doorOpen = false;
-            DoorAction("close");
+            DoorAction("Close");
         }
     }
 
