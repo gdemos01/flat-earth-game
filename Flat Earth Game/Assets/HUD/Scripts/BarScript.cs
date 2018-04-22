@@ -8,7 +8,22 @@ public class BarScript : MonoBehaviour {
     private float fillAmount;
 
     [SerializeField]
+    private float lerpSpeed;
+
+    [SerializeField]
     private Image fillIndicator;
+
+    [SerializeField]
+    private Text valueText;
+
+    [SerializeField]
+    private Color fullColor;
+
+    [SerializeField]
+    private Color lowColor;
+
+    [SerializeField]
+    private bool lerpColors;
 
     public float MaxValue { get; set; }
 
@@ -16,13 +31,18 @@ public class BarScript : MonoBehaviour {
     {
         set
         {
+            string[] tmp = valueText.text.Split(':');
+            valueText.text = tmp[0] + ": " + value;
             fillAmount = Map(value, 0, MaxValue, 0, 1);
         }
     }
 
 	// Use this for initialization
 	void Start () {
-		
+        if (lerpColors)
+        {
+            fillIndicator.color = fullColor;
+        }
 	}
 	
 	// Update is called once per frame
@@ -34,7 +54,12 @@ public class BarScript : MonoBehaviour {
     {
         if (fillAmount != fillIndicator.fillAmount)
         {
-            fillIndicator.fillAmount = fillAmount;
+            fillIndicator.fillAmount = Mathf.Lerp(fillIndicator.fillAmount, fillAmount, Time.deltaTime * lerpSpeed);
+        }
+
+        if (lerpColors)
+        {
+            fillIndicator.color = Color.Lerp(lowColor, fullColor, fillAmount);
         }
     }
     
