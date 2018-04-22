@@ -80,7 +80,7 @@ public class CentralIntelligence : MonoBehaviour {
 
 		// RULE BASED A.I.
 		timeInGame++;
-		print (timeInGame);
+		//print (timeInGame);
 
 		// Normal Time Spawn
 		if ((timeInGame % 5000 == 0) && timeInGame < 20000) 
