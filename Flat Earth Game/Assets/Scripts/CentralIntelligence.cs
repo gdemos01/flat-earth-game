@@ -7,6 +7,8 @@ public class CentralIntelligence : MonoBehaviour {
 
 	public GameObject agentPrefab;
 	public GameObject[] agents;
+	public GameObject[] citizens;
+	public GameObject[] citizenDP;
 	public GameObject[] cars;
 	public QuestManager questManager;
 	public AgentFSM states;
@@ -29,6 +31,9 @@ public class CentralIntelligence : MonoBehaviour {
 		timeInGame = 1;
 		carsLeft = 0;
 		startMarker = GameObject.Find ("StartMarker").GetComponent<Transform> ();
+		// Set Destination points for citizens
+		citizenDP = GameObject.FindGameObjectsWithTag ("DestinationPoint");
+
 	}
 
 	// Spanws a new agent at x,y,z
@@ -40,6 +45,20 @@ public class CentralIntelligence : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
+		// Citizens 
+		if (timeInGame % 500 == 0) {
+			print ("Here with time: "+timeInGame);
+			citizens = GameObject.FindGameObjectsWithTag ("Citizen");
+			foreach (GameObject citizen in citizens)
+			{
+				// Randomly select next destination for citizen
+				int r = Random.Range (0, citizenDP.Length);
+				//print (r);
+				destinationPoint = citizenDP[r].GetComponent<Transform> ().position;
+				GameObject.Find ("m1").GetComponent<NavMeshAgent> ().SetDestination (destinationPoint);
+			}
+		}
+
 		// CARS
 		if (timeInGame % 220 == 0 && carsLeft < 3){
 			Instantiate (cars [carsLeft], startMarker.position, cars[carsLeft].transform.rotation);
@@ -48,7 +67,7 @@ public class CentralIntelligence : MonoBehaviour {
 
 		// RULE BASED A.I.
 		timeInGame++;
-		//print (timeInGame);
+		print (timeInGame);
 
 		// Normal Time Spawn
 		if ((timeInGame % 5000 == 0) && timeInGame < 20000) 
