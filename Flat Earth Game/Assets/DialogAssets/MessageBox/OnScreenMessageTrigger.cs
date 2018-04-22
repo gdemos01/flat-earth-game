@@ -29,6 +29,7 @@ public class OnScreenMessageTrigger : MonoBehaviour {
         }
     }
 
+	// Displays any on screen message - No need for collision
 	public void displayMessage(string msg){
 		onScreenMessage.setOnScreenMessage (msg);
 		FindObjectOfType<MessageBoxManager> ().StartOnScreenMessage (onScreenMessage);

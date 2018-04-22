@@ -49,7 +49,7 @@ public class GameManager : MonoBehaviour {
 		}	
 
 		if (Input.GetKeyDown (KeyCode.E) && useCamera) {
-			// Set trigger to Finish Q1 or Q3 here
+			// Set trigger to Finish Q1 or Q2 here
 			if (Vector3.Distance (Talf.transform.position, Q1Point.transform.position) < 2) {
 				questManager.changeObjectiveStatus ("Q1", true);
 				print ("Congratulations! You completed the first objective");
@@ -60,10 +60,14 @@ public class GameManager : MonoBehaviour {
 
 		// Check for Q3
 		DialogueManager dm = GameObject.Find("DialogueManager").GetComponent<DialogueManager>();
+		GameObject q3Leader = GameObject.Find ("Leader");
 		if (dm.dialogueBegan && dm.dialogueFinishedEntierly){
 			questManager.changeObjectiveStatus ("Q3", true);
 			signature.Play ();
 			print ("Congratulations! You completed the Q3 objective");
+			// Hides any on screen messages
+			FindObjectOfType<MessageBoxManager>().EndOnScreenMessage();
+			q3Leader.GetComponent<OnScreenMessageTrigger>().displayMessage("Congratulations! You completed the Q3 objective");
 			dm.dialogueBegan = false;
 		}
 	}
