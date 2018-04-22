@@ -9,6 +9,8 @@ public class CentralIntelligence : MonoBehaviour {
 	public GameObject[] agents;
 	public GameObject[] citizens;
 	public GameObject[] citizenDP;
+	public GameObject[] parkCitizens;
+	public GameObject[] parkDP;
 	public GameObject[] cars;
 	public QuestManager questManager;
 	public AgentFSM states;
@@ -33,6 +35,7 @@ public class CentralIntelligence : MonoBehaviour {
 		startMarker = GameObject.Find ("StartMarker").GetComponent<Transform> ();
 		// Set Destination points for citizens
 		citizenDP = GameObject.FindGameObjectsWithTag ("DestinationPoint");
+		parkDP = GameObject.FindGameObjectsWithTag ("ParkDP");
 
 	}
 
@@ -47,7 +50,6 @@ public class CentralIntelligence : MonoBehaviour {
 
 		// Citizens 
 		if (timeInGame % 500 == 0) {
-			print ("Here with time: "+timeInGame);
 			citizens = GameObject.FindGameObjectsWithTag ("Citizen");
 			foreach (GameObject citizen in citizens)
 			{
@@ -55,7 +57,18 @@ public class CentralIntelligence : MonoBehaviour {
 				int r = Random.Range (0, citizenDP.Length);
 				//print (r);
 				destinationPoint = citizenDP[r].GetComponent<Transform> ().position;
-				GameObject.Find ("m1").GetComponent<NavMeshAgent> ().SetDestination (destinationPoint);
+				citizen.GetComponent<NavMeshAgent> ().SetDestination (destinationPoint);
+			}
+
+			//park
+			parkCitizens = GameObject.FindGameObjectsWithTag ("ParkCitizen");
+			foreach (GameObject parkCitizen in parkCitizens)
+			{
+				// Randomly select next destination for citizen
+				int r = Random.Range (0, parkDP.Length);
+				//print (r);
+				destinationPoint = parkDP[r].GetComponent<Transform> ().position;
+				parkCitizen.GetComponent<NavMeshAgent> ().SetDestination (destinationPoint);
 			}
 		}
 

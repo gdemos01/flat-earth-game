@@ -55,9 +55,9 @@ public class GameManager : MonoBehaviour {
 		if (dm.dialogueBegan && dm.dialogueFinishedEntierly){
 			questManager.changeObjectiveStatus ("Q3", true);
 			signature.Play ();
-			print ("Congratulations! You completed the Q3 objective");
+			print ("Congratulations! You completed the citizens objective");
 			FindObjectOfType<MessageBoxManager>().EndOnScreenMessage(); 			// Hides any on screen messages
-			q3Leader.GetComponent<OnScreenMessageTrigger>().displayMessage("Congratulations! You completed the Q3 objective");
+			q3Leader.GetComponent<OnScreenMessageTrigger>().displayMessage("Congratulations! You completed the citizens objective");
 			dm.dialogueBegan = false;
 		}
 	}
