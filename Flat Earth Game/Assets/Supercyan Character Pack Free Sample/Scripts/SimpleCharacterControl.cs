@@ -3,6 +3,9 @@ using System.Collections.Generic;
 
 public class SimpleCharacterControl : MonoBehaviour {
 
+   private  int count = 0;
+    bool ammo_flag = false;
+
     private enum ControlMode
     {
         Tank,
@@ -33,6 +36,18 @@ public class SimpleCharacterControl : MonoBehaviour {
 
     private bool m_isGrounded;
     private List<Collider> m_collisions = new List<Collider>();
+    
+    void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("ammobox"))
+        {
+            count++;
+            if (count == 5) {
+                print("count= " + count);
+                ammo_flag = true;
+            }
+        }
+    }
 
     private void OnCollisionEnter(Collision collision)
     {
@@ -89,8 +104,8 @@ public class SimpleCharacterControl : MonoBehaviour {
 
 	void Update () {
         m_animator.SetBool("Grounded", m_isGrounded);
-
-        switch(m_controlMode)
+        
+        switch (m_controlMode)
         {
             case ControlMode.Direct:
                 DirectUpdate();
