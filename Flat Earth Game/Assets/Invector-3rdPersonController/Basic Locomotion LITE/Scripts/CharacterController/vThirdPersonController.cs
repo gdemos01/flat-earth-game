@@ -19,7 +19,7 @@ namespace Invector.CharacterController
 
         public virtual void Strafe()
         {
-            if (locomotionType == LocomotionType.OnlyFree) return;
+           // if (locomotionType == LocomotionType.OnlyFree) return;
             isStrafing = !isStrafing;
         }
 

@@ -17,7 +17,7 @@ namespace Invector.CharacterController
         public KeyCode sprintInput = KeyCode.LeftShift;
 
         [Header("Camera Settings")]
-        public string rotateCameraXInput ="Mouse X";
+        public string rotateCameraXInput = "Mouse X";
         public string rotateCameraYInput = "Mouse Y";
 
         protected vThirdPersonCamera tpCamera;                // acess camera info        
@@ -53,11 +53,11 @@ namespace Invector.CharacterController
             Cursor.visible = false;
             Cursor.lockState = CursorLockMode.Locked;
         }
-
+        
         protected virtual void LateUpdate()
         {
             if (cc == null) return;             // returns if didn't find the controller		    
-            InputHandle();                      // update input methods
+            //InputHandle();                      // update input methods
             UpdateCameraStates();               // update camera states
         }
 
@@ -68,9 +68,9 @@ namespace Invector.CharacterController
         }
 
         protected virtual void Update()
-        {
-            cc.UpdateMotor();                   // call ThirdPersonMotor methods               
-            cc.UpdateAnimator();                // call ThirdPersonAnimator methods		               
+        { 
+         //   cc.UpdateMotor();                   // call ThirdPersonMotor methods               
+         //   cc.UpdateAnimator();                // call ThirdPersonAnimator methods		               
         }
 
         protected virtual void InputHandle()
@@ -90,7 +90,7 @@ namespace Invector.CharacterController
         #region Basic Locomotion Inputs      
 
         protected virtual void MoveCharacter()
-        {            
+        {
             cc.input.x = Input.GetAxis(horizontalInput);
             cc.input.y = Input.GetAxis(verticallInput);
         }
@@ -100,12 +100,12 @@ namespace Invector.CharacterController
             if (Input.GetKeyDown(strafeInput))
                 cc.Strafe();
         }
-
+        
         protected virtual void SprintInput()
         {
             if (Input.GetKeyDown(sprintInput))
                 cc.Sprint(true);
-            else if(Input.GetKeyUp(sprintInput))
+            else if (Input.GetKeyUp(sprintInput))
                 cc.Sprint(false);
         }
 
@@ -144,7 +144,7 @@ namespace Invector.CharacterController
             if (!keepDirection)
                 cc.UpdateTargetDirection(tpCamera != null ? tpCamera.transform : null);
             // rotate the character with the camera while strafing        
-            RotateWithCamera(tpCamera != null ? tpCamera.transform : null);            
+            RotateWithCamera(tpCamera != null ? tpCamera.transform : null);
         }
 
         protected virtual void UpdateCameraStates()
@@ -160,17 +160,18 @@ namespace Invector.CharacterController
                     tpCamera.SetMainTarget(this.transform);
                     tpCamera.Init();
                 }
-            }            
+            }
         }
 
         protected virtual void RotateWithCamera(Transform cameraTransform)
         {
             if (cc.isStrafing && !cc.lockMovement && !cc.lockMovement)
-            {                
-                cc.RotateWithAnotherTransform(cameraTransform);                
+            {
+                cc.RotateWithAnotherTransform(cameraTransform);
             }
         }
 
-        #endregion     
+        #endregion
     }
+
 }

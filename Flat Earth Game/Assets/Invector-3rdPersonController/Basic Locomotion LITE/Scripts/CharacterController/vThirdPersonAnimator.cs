@@ -9,9 +9,9 @@ namespace Invector.CharacterController
         {
             if (animator == null || !animator.enabled) return;
 
-            animator.SetBool("IsStrafing", isStrafing);
-            animator.SetBool("IsGrounded", isGrounded);
-            animator.SetFloat("GroundDistance", groundDistance);
+           // animator.SetBool("IsStrafing", isStrafing);
+            //animator.SetBool("IsGrounded", isGrounded);
+           // animator.SetFloat("GroundDistance", groundDistance);
 
             if (!isGrounded)
                 animator.SetFloat("VerticalVelocity", verticalVelocity);
@@ -23,7 +23,7 @@ namespace Invector.CharacterController
             }
 
             // fre movement get the input 0 to 1
-            animator.SetFloat("InputVertical", speed, 0.1f, Time.deltaTime);
+           // animator.SetFloat("InputVertical", speed, 0.1f, Time.deltaTime);
         }
 
         public void OnAnimatorMove()
