@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Trial : MonoBehaviour {
+public class ThridPerson : MonoBehaviour {
 
 	private float m_jumpTimeStamp = 0;
 	private float m_minJumpInterval = 0.25f;
@@ -40,7 +40,7 @@ public class Trial : MonoBehaviour {
 		anim.SetTrigger("Land");
 		m_wasGrounded = onGround;
 	}
-		
+
 
 	void HandleFriction(){
 		if (horizontal == 0 && vertical == 0) {
@@ -167,10 +167,7 @@ public class Trial : MonoBehaviour {
 
 			if(angle!=0) // Look towards the camera
 				rigidBody.rotation = Quaternion.Slerp(transform.rotation,Quaternion.LookRotation(dir),turnSpeed* Time.deltaTime);
-			
+
 		}
 	}
-
-
-
 }
