@@ -10,11 +10,21 @@ public class Player : MonoBehaviour {
     [SerializeField]
     private Stat persuate;
 
+	[SerializeField]
+	private GameObject questPanel;
+
+	private Animator questPanelAnimator;
+	private bool isShown = false;
+
     private void Awake()
     {
         health.Initialize();
         persuate.Initialize();
     }
+
+	void Start(){
+		questPanelAnimator = questPanel.GetComponent<Animator>();
+	}
 
     // Update is called once per frame
     void Update () {
@@ -37,5 +47,21 @@ public class Player : MonoBehaviour {
         {
             persuate.CurrentVal += 10;
         }
+			
     }
+
+	void LateUpdate(){
+		if(Input.GetKeyDown(KeyCode.Q))
+		{
+			if (isShown) {
+				//HIDE QUEST PANEL
+				questPanelAnimator.SetBool ("Show", false);
+				isShown = false;
+			} else {
+				//SHOW QUEST PANEL
+				questPanelAnimator.SetBool ("Show", true);
+				isShown = true;
+			}
+		}
+	}
 }
