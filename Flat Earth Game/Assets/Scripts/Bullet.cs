@@ -21,7 +21,7 @@ public class Bullet : MonoBehaviour
       //  print("hit");
 
         GameObject hit = collision.gameObject;
-        print(""+hit.name);
+        //print(""+hit.name);
         Health health = hit.GetComponent<Health>();
         if (health != null)
         {
