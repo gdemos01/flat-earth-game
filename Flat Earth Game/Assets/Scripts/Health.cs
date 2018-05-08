@@ -9,7 +9,7 @@ public class Health : MonoBehaviour
 
     AudioSource _audioSource;
     public AudioClip _audioClip;
-    public AudioClip hitsound;
+  //  public AudioClip hitsound;
     
 
     private void Start()
@@ -21,7 +21,7 @@ public class Health : MonoBehaviour
 
     public void TakeDamage(int amount, GameObject hit)
     {
-        _audioSource.PlayOneShot(hitsound);
+        //_audioSource.PlayOneShot(hitsound);
 
         currentHealth -= amount;
        // print("health= " + currentHealth);
