@@ -32,7 +32,7 @@ public class link_test : MonoBehaviour {
                 }
             if (door==2) {
                 SceneManager.LoadScene(2);
-            }
+                }
             }
         }
     }
