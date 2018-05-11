@@ -32,8 +32,9 @@ public class ThridPerson : MonoBehaviour {
 	void Start(){
 		rigidBody = GetComponent<Rigidbody> ();
 		cam = Camera.main.transform;
-		capCol = GetComponent<CapsuleCollider> ();
-		SetupAnimator ();
+        capCol = GetComponent<CapsuleCollider> ();
+
+        SetupAnimator();
 		onGround = true;
 
 		anim.SetBool("Grounded", onGround);
@@ -124,7 +125,7 @@ public class ThridPerson : MonoBehaviour {
 	}
 
 	void Update(){
-		HandleFriction ();
+        HandleFriction ();
 
 		anim.SetBool("Grounded", onGround);
 
