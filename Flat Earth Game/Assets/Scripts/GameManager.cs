@@ -9,7 +9,8 @@ public class GameManager : MonoBehaviour {
 	public GameObject cameraFrame;
 	public QuestManager questManager;
 	public GameObject Q1Point;
-	public GameObject q3Leader;
+    public GameObject Q2Point;
+    public GameObject q3Leader;
 	public GameObject Talf;
 	private bool useCamera;
 	public AudioSource shutter;
@@ -20,7 +21,8 @@ public class GameManager : MonoBehaviour {
 		photo.gameObject.SetActive (false);
 		cameraFrame = GameObject.Find ("CameraFrame");
 		Q1Point = GameObject.Find ("Q1Point");
-		q3Leader = GameObject.Find ("Leader");
+        Q2Point = GameObject.Find("Q2Point");
+        q3Leader = GameObject.Find ("Leader");
 		Talf = GameObject.Find ("Talf");
 		questManager = GameObject.Find ("QuestManager").GetComponent<QuestManager>();
 		useCamera = false;
@@ -46,9 +48,17 @@ public class GameManager : MonoBehaviour {
 				Q1Point.GetComponent<OnScreenMessageTrigger>().displayMessage("Congratulations! You completed the strainght lake objective");
 				print ("Congratulations! You completed the strainght lake objective");
 				print (questManager.getPercentageFinished ());
-			}
-			shutter.Play();
-		}
+			}else if (Vector3.Distance(Talf.transform.position, Q2Point.transform.position) < 2)
+            {
+                questManager.changeObjectiveStatus("Q2", true);
+                FindObjectOfType<MessageBoxManager>().EndOnScreenMessage();                 // Hides any on screen messages
+                Q2Point.GetComponent<OnScreenMessageTrigger>().displayMessage("Congratulations! You completed the strainght road objective");
+                print("Congratulations! You completed the strainght road objective");
+                print(questManager.getPercentageFinished());
+            }
+
+            shutter.Play();
+        }
 
 		// Check for Q3
 		DialogueManager dm = GameObject.Find("DialogueManager").GetComponent<DialogueManager>();
