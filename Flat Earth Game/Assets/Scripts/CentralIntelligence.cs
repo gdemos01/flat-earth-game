@@ -127,7 +127,7 @@ public class CentralIntelligence : MonoBehaviour {
 		{
 			states = agent.GetComponent<AgentFSM> ();
 			meshAgent = agent.GetComponent<NavMeshAgent>();
-			destinationPoint = GameObject.Find ("Talf").GetComponent<Transform> ().position -  new Vector3(3f,0f,0f);
+			destinationPoint = GameObject.Find ("Talf").GetComponent<Transform> ().position -  new Vector3(2f,0f,0f);
 			states.evaluateState (destinationPoint);
 			meshAgent.SetDestination (destinationPoint);
 		}
