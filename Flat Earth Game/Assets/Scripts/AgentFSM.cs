@@ -14,7 +14,7 @@ public class AgentFSM : MonoBehaviour {
 			Walk ();
 		}else if(distance > 1 && distance <= 50) {
 			Run ();
-			print (distance);
+			//print (distance);
 		} else {
 			// Panaxas comes here
 			// Add connections to your fighting scene here

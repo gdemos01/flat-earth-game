@@ -48,7 +48,7 @@ public class GameManager : MonoBehaviour {
 				Q1Point.GetComponent<OnScreenMessageTrigger>().displayMessage("Congratulations! You completed the strainght lake objective");
 				print ("Congratulations! You completed the strainght lake objective");
 				print (questManager.getPercentageFinished ());
-			}else if (Vector3.Distance(Talf.transform.position, Q2Point.transform.position) < 2)
+			}else if (Vector3.Distance(Talf.transform.position, Q2Point.transform.position) < 3)
             {
                 questManager.changeObjectiveStatus("Q2", true);
                 FindObjectOfType<MessageBoxManager>().EndOnScreenMessage();                 // Hides any on screen messages
@@ -57,6 +57,7 @@ public class GameManager : MonoBehaviour {
                 print(questManager.getPercentageFinished());
             }
 
+            print("HERE "+Vector3.Distance(Talf.transform.position, Q2Point.transform.position));
             shutter.Play();
         }
 
