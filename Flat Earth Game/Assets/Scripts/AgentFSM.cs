@@ -7,6 +7,8 @@ public class AgentFSM : MonoBehaviour {
 	const int countOfDamageAnimations = 3;
 	int lastDamageAnimation = -1;
 	private Animator animator;
+	public GameObject bulletPrefab;
+	public Transform bulletSpawn;
 
 	public void evaluateState(Vector3 target){
 		float distance = Vector3.Distance (target, transform.position);
@@ -20,8 +22,19 @@ public class AgentFSM : MonoBehaviour {
 			// Add connections to your fighting scene here
 			// Feel free to use any other animations instead of attack() 
 			// Look at the entire script
-			// NOTE: ENEMIES SHOULD DIE EASYLY (MAYBE JUST A COUPLE OF TURTLE SHOTS)
+			// NOTE: ENEMIES SHOULD DIE EASYLY (MAYBE JUST A COUPLE OF TURTLE SHOTS				
+			transform.rotation = Quaternion.LookRotation (target);
 			Attack ();
+			/*
+
+			// Shooting
+			GameObject bullet = (GameObject)Instantiate(bulletPrefab, bulletSpawn.position,Quaternion.LookRotation (target));
+			bullet.GetComponent<Rigidbody>().velocity = bullet.transform.forward * 6f;
+			Vector3 v = bullet.GetComponent<Rigidbody>().velocity.normalized;   //used for calulating the range
+
+			float t = 1 / ((Mathf.Abs(v.x) + Mathf.Abs(v.y) + Mathf.Abs(v.z)) / 3); //destroy bullet after some time
+
+			Destroy(bullet, t);*/
 		}
 	}
 

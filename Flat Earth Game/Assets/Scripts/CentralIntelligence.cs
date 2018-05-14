@@ -49,7 +49,7 @@ public class CentralIntelligence : MonoBehaviour {
 	void Update () {
 
 		// Citizens 
-		if (timeInGame % 500 == 0) {
+		if (timeInGame % 200 == 0) {
 			citizens = GameObject.FindGameObjectsWithTag ("Citizen");
 			foreach (GameObject citizen in citizens)
 			{

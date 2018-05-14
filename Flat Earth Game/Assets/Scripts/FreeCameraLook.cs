@@ -26,6 +26,7 @@ public class FreeCameraLook : Pivot {
 		base.Awake();
 
         Cursor.lockState = CursorLockMode.Confined;
+		Cursor.visible = false;
 
 		cam = GetComponentInChildren<Camera>().transform;
 		pivot = cam.parent;
