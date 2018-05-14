@@ -50,8 +50,10 @@ public class shoot : MonoBehaviour
             directionPos = transform.position + (storeDir * horizontal) + (cam.forward * vertical);
 
             Vector3 dir = directionPos - transform.position;
-           
+
             GameObject bullet = (GameObject)Instantiate(bulletPrefab, bulletSpawn.position,cam.rotation);
+            bullet.transform.Rotate(Vector3.forward * 90);
+
             bullet.GetComponent<Rigidbody>().velocity = bullet.transform.forward * 6f;
 
             Vector3 v = bullet.GetComponent<Rigidbody>().velocity.normalized;   //used for calulating the range
