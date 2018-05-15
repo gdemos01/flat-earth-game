@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player : MonoBehaviour {
+public class Player : MonoBehaviour
+{
 
     [SerializeField]
     private Stat health;
@@ -10,11 +11,15 @@ public class Player : MonoBehaviour {
     [SerializeField]
     private Stat persuate;
 
-	[SerializeField]
-	private GameObject questPanel;
+    [SerializeField]
+    private GameObject questPanel;
 
-	private Animator questPanelAnimator;
-	private bool isShown = false;
+    private Animator questPanelAnimator;
+    private bool isShown = false;
+
+
+    AudioSource _audioSource;
+    public AudioClip _audioClip;
 
     private void Awake()
     {
@@ -22,12 +27,16 @@ public class Player : MonoBehaviour {
         persuate.Initialize();
     }
 
-	void Start(){
-		questPanelAnimator = questPanel.GetComponent<Animator>();
-	}
+    void Start()
+    {
+        questPanelAnimator = questPanel.GetComponent<Animator>();
+
+        _audioSource = GetComponent<AudioSource>();
+    }
 
     // Update is called once per frame
-    void Update () {
+    void Update()
+    {
         if (Input.GetKeyDown(KeyCode.U))
         {
             health.CurrentVal += 10;
@@ -47,21 +56,42 @@ public class Player : MonoBehaviour {
         {
             persuate.CurrentVal += 10;
         }
-			
+
     }
 
-	void LateUpdate(){
-		if(Input.GetKeyDown(KeyCode.Q))
-		{
-			if (isShown) {
-				//HIDE QUEST PANEL
-				questPanelAnimator.SetBool ("Show", false);
-				isShown = false;
-			} else {
-				//SHOW QUEST PANEL
-				questPanelAnimator.SetBool ("Show", true);
-				isShown = true;
-			}
-		}
-	}
+    void LateUpdate()
+    {
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            if (isShown)
+            {
+                //HIDE QUEST PANEL
+                questPanelAnimator.SetBool("Show", false);
+                isShown = false;
+            }
+            else
+            {
+                //SHOW QUEST PANEL
+                questPanelAnimator.SetBool("Show", true);
+                isShown = true;
+            }
+        }
+    }
+    public void TakeDamage(int amount, GameObject hit)
+    {
+        //_audioSource.PlayOneShot(hitsound);
+
+        health.CurrentVal -= amount;
+        // print("health= " + currentHealth);
+        if (health.CurrentVal <= 0)
+        {
+
+            Renderer[] renderers = GetComponentsInChildren<Renderer>();
+            foreach (Renderer r in renderers)
+                r.enabled = false;
+            _audioSource.PlayOneShot(_audioClip);
+
+            Destroy(hit, _audioClip.length);
+        }
+    }
 }
