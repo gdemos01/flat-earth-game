@@ -21,12 +21,12 @@ public class Bullet : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        //  print("hit");
+        //print("hit");
         _audioSource.PlayOneShot(hitsound);
 
         GameObject hit = collision.gameObject;
         //print(""+hit.name);
-        Health health = hit.GetComponent<Health>();
+		Player health = hit.GetComponent<Player>();
         if (health != null)
         {
             health.TakeDamage(25, hit);

@@ -80,7 +80,6 @@ public class Player : MonoBehaviour
     public void TakeDamage(int amount, GameObject hit)
     {
         //_audioSource.PlayOneShot(hitsound);
-
         health.CurrentVal -= amount;
         // print("health= " + currentHealth);
         if (health.CurrentVal <= 0)
