@@ -82,12 +82,6 @@ public class CentralIntelligence : MonoBehaviour {
 		timeInGame++;
 		//print (timeInGame);
 
-		// PANAXAS TIME SPAWN DELETE LATER
-		if ((timeInGame % 500 == 0) && timeInGame < 20000) 
-		{
-			spawnAgent (-98,(float)0.8333,44);
-		}
-
 		// Normal Time Spawn
 		if ((timeInGame % 5000 == 0) && timeInGame < 20000) 
 		{
