@@ -15,10 +15,6 @@ public class Bullet : MonoBehaviour
         _audioSource = GetComponent<AudioSource>();
     }
 
-    // Update is called once per frame
-    void Update()
-    {    }
-
     private void OnCollisionEnter(Collision collision)
     {
         //print("hit");
@@ -26,12 +22,13 @@ public class Bullet : MonoBehaviour
 
         GameObject hit = collision.gameObject;
         //print(""+hit.name);
-		Player health = hit.GetComponent<Player>();
-        if (health != null)
-        {
-            health.TakeDamage(25, hit);
-        }
 
-        Destroy(gameObject, hitsound.length);
+		if (!hit.name.Equals ("Talf")) {
+			Health health = hit.GetComponent<Health> ();
+			if (health != null) {
+				health.TakeDamage (25, hit);
+			}
+		}
+		Destroy (gameObject, hitsound.length);
     }
 }

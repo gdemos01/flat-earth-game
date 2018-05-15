@@ -10,7 +10,7 @@ public class AgentFSM : MonoBehaviour
     private Animator animator;
     public GameObject bulletPrefab;
     public Transform bulletSpawn;
-
+	public AudioSource discovery;
 
     int shooti = 0;
 
@@ -28,12 +28,12 @@ public class AgentFSM : MonoBehaviour
         else if (distance > 1 && distance <= 50)
         {
             Run();
+			discovery.Play ();
             //print (distance);
         }
         else
         {
             Attack();
-
             shooti++;
             if (shooti - 100 >= System.Int32.MaxValue) { shooti = 0; }
             if ((shooti % 25) == 0)
@@ -48,7 +48,7 @@ public class AgentFSM : MonoBehaviour
                 Destroy(bullet, t);
             }
         }
-    }
+    } 
 
     void Awake()
     {
