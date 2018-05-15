@@ -17,8 +17,6 @@ public class AgentFSM : MonoBehaviour
     public void evaluateState(Vector3 target)
     {
         float distance = Vector3.Distance(target, transform.position);
-		//transform.rotation = Quaternion.LookRotation (target);
-		print ("This "+target);
 
 		Vector3 look = target + new Vector3 (2f, 0, 0);
 		transform.LookAt(new Vector3(look.x, transform.position.y, look.z));
@@ -34,17 +32,11 @@ public class AgentFSM : MonoBehaviour
         }
         else
         {
-            // Panaxas comes here
-            // Add connections to your fighting scene here
-            // Feel free to use any other animations instead of attack() 
-            // Look at the entire script
-            // NOTE: ENEMIES SHOULD DIE EASYLY (MAYBE JUST A COUPLE OF TURTLE SHOTS				
-
             Attack();
 
             shooti++;
             if (shooti - 100 >= System.Int32.MaxValue) { shooti = 0; }
-            if ((shooti % 50) == 0)
+            if ((shooti % 25) == 0)
             {
                 // Shooting
 				GameObject bullet = (GameObject)Instantiate(bulletPrefab, bulletSpawn.position, Quaternion.LookRotation(new Vector3(90,0,0)));
