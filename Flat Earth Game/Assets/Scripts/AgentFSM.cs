@@ -11,11 +11,18 @@ public class AgentFSM : MonoBehaviour
     public GameObject bulletPrefab;
     public Transform bulletSpawn;
 
+
     int shooti = 0;
 
     public void evaluateState(Vector3 target)
     {
         float distance = Vector3.Distance(target, transform.position);
+		//transform.rotation = Quaternion.LookRotation (target);
+		print ("This "+target);
+
+		Vector3 look = target + new Vector3 (2f, 0, 0);
+		transform.LookAt(new Vector3(look.x, transform.position.y, look.z));
+
         if (distance > 50)
         {
             Walk();
@@ -32,16 +39,15 @@ public class AgentFSM : MonoBehaviour
             // Feel free to use any other animations instead of attack() 
             // Look at the entire script
             // NOTE: ENEMIES SHOULD DIE EASYLY (MAYBE JUST A COUPLE OF TURTLE SHOTS				
-            transform.rotation = Quaternion.LookRotation(target);
+
             Attack();
 
             shooti++;
             if (shooti - 100 >= System.Int32.MaxValue) { shooti = 0; }
-            if ((shooti % 20) == 0)
+            if ((shooti % 50) == 0)
             {
                 // Shooting
-
-                GameObject bullet = (GameObject)Instantiate(bulletPrefab, bulletSpawn.position, Quaternion.LookRotation(target));
+				GameObject bullet = (GameObject)Instantiate(bulletPrefab, bulletSpawn.position, Quaternion.LookRotation(new Vector3(90,0,0)));
                 bullet.GetComponent<Rigidbody>().velocity = bullet.transform.forward * 6f;
                 Vector3 v = bullet.GetComponent<Rigidbody>().velocity.normalized;   //used for calulating the range
 
