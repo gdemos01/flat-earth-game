@@ -24,7 +24,7 @@ public class Health : MonoBehaviour
         //_audioSource.PlayOneShot(hitsound);
 
         currentHealth -= amount;
-        print("health= " + currentHealth);
+        //print("health= " + currentHealth);
         if (currentHealth<=0) {
 
            Renderer[] renderers = GetComponentsInChildren<Renderer>();

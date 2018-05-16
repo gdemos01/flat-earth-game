@@ -23,8 +23,8 @@ public class Player : MonoBehaviour
 
     private void Awake()
     {
-        health.Initialize();
-        persuate.Initialize();
+		health = GetComponent<Persistence>().health;
+		persuate = GetComponent<Persistence>().persuate;
     }
 
     void Start()
