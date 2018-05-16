@@ -5,10 +5,10 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
 
-    [SerializeField]
+	[SerializeField]
     private Stat health;
 
-    [SerializeField]
+	[SerializeField]
     private Stat persuate;
 
     [SerializeField]
@@ -23,8 +23,8 @@ public class Player : MonoBehaviour
 
     private void Awake()
     {
-		health = GetComponent<Persistence>().health;
-		persuate = GetComponent<Persistence>().persuate;
+		health.Initialize();
+		persuate.Initialize ();
     }
 
     void Start()
@@ -37,6 +37,8 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+		health.CurrentVal = GameObject.Find ("Persistence").GetComponent<Persistence> ().health;
+		persuate.CurrentVal = GameObject.Find ("Persistence").GetComponent<Persistence> ().persuate;
         if (Input.GetKeyDown(KeyCode.U))
         {
             health.CurrentVal += 10;
@@ -80,11 +82,11 @@ public class Player : MonoBehaviour
     }
     public void TakeDamage(int amount, GameObject hit)
     {
-        //_audioSource.PlayOneShot(hitsound);
-       
-        Game_Control.ctrl.health -= amount;
-        health.CurrentVal = Game_Control.ctrl.health;
-        // print("health= " + currentHealth);
+
+		GameObject.Find ("Persistence").GetComponent<Persistence> ().health -= amount;
+		health.CurrentVal -= amount;
+
+		//print("health= " + health.CurrentVal);
         if (health.CurrentVal <= 0)
         {
 

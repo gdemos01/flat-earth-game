@@ -6,21 +6,17 @@ public class Persistence : MonoBehaviour {
 
 	private static bool created = false;
 
-	[SerializeField]
-	public Stat health;
-
-	[SerializeField]
-	public Stat persuate;
+	public int health;
+	public int persuate;
 
 	void Awake()
 	{
 		if (!created)
 		{
-			health.Initialize();
-			persuate.Initialize();
+			health = 100;
+			persuate = 0;
 			DontDestroyOnLoad(this.gameObject);
 			created = true;
-			Debug.Log("Awake: " + this.gameObject);
 		}
 	}
 }
