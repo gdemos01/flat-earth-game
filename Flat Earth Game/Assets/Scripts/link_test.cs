@@ -31,7 +31,7 @@ public class link_test : MonoBehaviour {
                 if (train_complete == true) {
                     float fadeTime = GetComponent<Fading>().BeginFade(1);
                     yield return new WaitForSeconds(fadeTime);
-                    SceneManager.LoadScene(2);
+                    SceneManager.LoadScene(3);
                 }
             } 
             
@@ -39,19 +39,19 @@ public class link_test : MonoBehaviour {
                
 				float fadeTime = GetComponent<Fading> ().BeginFade (1);
 				yield return new WaitForSeconds (fadeTime);
-				SceneManager.LoadScene (2);
+				SceneManager.LoadScene (3);
 			} else {
 				if (door == 1)
 				{
                     float fadeTime = GetComponent<Fading>().BeginFade(1);
                     yield return new WaitForSeconds(fadeTime);
-                    SceneManager.LoadScene(1);
+                    SceneManager.LoadScene(2);
 				}
 
 				if (door==2) {
                     float fadeTime = GetComponent<Fading>().BeginFade(1);
                     yield return new WaitForSeconds(fadeTime);
-                    SceneManager.LoadScene(3);
+                    SceneManager.LoadScene(4);
 				}
 			}
 		}

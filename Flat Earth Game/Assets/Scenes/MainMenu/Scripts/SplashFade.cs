@@ -19,7 +19,14 @@ public class SplashFade : MonoBehaviour {
         yield return new WaitForSeconds(2.5f);
         FadeOut();
         yield return new WaitForSeconds(2.5f);
+
         SceneManager.LoadScene(loadLevel);
+    }
+
+    IEnumerator ChangeScene()
+    {
+        float fadeTime = GetComponent<Fading>().BeginFade(1);
+        yield return new WaitForSeconds(fadeTime);
     }
 
     void FadeIn()
@@ -32,5 +39,7 @@ public class SplashFade : MonoBehaviour {
     {
         splashImage.CrossFadeAlpha(0.0f, 2.5f, false);
         textLabel.CrossFadeAlpha(0.0f, 2.5f, false);
+
+        StartCoroutine(ChangeScene());
     }
 }
