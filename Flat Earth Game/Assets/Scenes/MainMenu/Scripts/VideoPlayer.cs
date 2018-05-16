@@ -15,6 +15,8 @@ public class VideoPlayer : MonoBehaviour {
         audio = GetComponent<AudioSource>();
         audio.clip = movie.audioClip;
 
+        movie.loop = true;
+
         movie.Play();
         audio.Play();
 	}
