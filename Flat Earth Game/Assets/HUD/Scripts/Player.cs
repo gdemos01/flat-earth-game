@@ -40,6 +40,7 @@ public class Player : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.U))
         {
             health.CurrentVal += 10;
+           // Game_Control.ctrl.health += 10;
         }
 
         if (Input.GetKeyDown(KeyCode.Y))
@@ -80,7 +81,9 @@ public class Player : MonoBehaviour
     public void TakeDamage(int amount, GameObject hit)
     {
         //_audioSource.PlayOneShot(hitsound);
-        health.CurrentVal -= amount;
+       
+        Game_Control.ctrl.health -= amount;
+        health.CurrentVal = Game_Control.ctrl.health;
         // print("health= " + currentHealth);
         if (health.CurrentVal <= 0)
         {
