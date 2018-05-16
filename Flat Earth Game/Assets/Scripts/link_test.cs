@@ -19,21 +19,28 @@ public class link_test : MonoBehaviour {
 	}
     void OnTriggerEnter(Collider other)
     {
-        sc = SceneManager.GetActiveScene();
-        //   print("contact");
-         if (other.gameObject.tag == "Player")
-        {
-            if ((sc.name == "hq") || (sc.name == "Municipality"))
-                SceneManager.LoadScene(1);
-            if (sc.name == "Sandbox") { 
-                if (door == 1)
-                {
-                    SceneManager.LoadScene(0);
-                }
-            if (door==2) {
-                SceneManager.LoadScene(2);
-                }
-            }
-        }
+		StartCoroutine (changeScene (other));
     }
+
+	IEnumerator changeScene(Collider other){
+
+		print ("GAMAMAMAM");
+		sc = SceneManager.GetActiveScene();
+		if (other.gameObject.tag == "Player") {
+			if ((sc.name == "hq") || (sc.name == "Municipality")) {
+				float fadeTime = GameObject.Find ("MayorManager").GetComponent<Fading> ().BeginFade (1);
+				yield return new WaitForSeconds (fadeTime);
+				SceneManager.LoadScene (2);
+			} else {
+				if (door == 1)
+				{
+					SceneManager.LoadScene(0);
+				}
+
+				if (door==2) {
+					SceneManager.LoadScene(2);
+				}
+			}
+		}
+	}
 }
