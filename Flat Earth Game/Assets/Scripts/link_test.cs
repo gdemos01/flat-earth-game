@@ -8,7 +8,7 @@ public class link_test : MonoBehaviour {
     public int door;// 1 goes to hq , 2 goes to Municipality
     public bool train_complete = false;
 
-   public bool training_completed = true;
+    public bool training_completed = true;
 
     // Use this for initialization
     void Start () {
