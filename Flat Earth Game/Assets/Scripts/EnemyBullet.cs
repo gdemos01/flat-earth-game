@@ -23,7 +23,7 @@ public class EnemyBullet : MonoBehaviour {
 		Player health = hit.GetComponent<Player>();
 		if (health != null)
 		{
-			health.TakeDamage(25, hit);
+			health.TakeDamage(10, hit);
 		}
 
 		Destroy(gameObject, hitsound.length);

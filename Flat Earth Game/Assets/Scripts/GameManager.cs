@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour {
 	
@@ -28,14 +29,48 @@ public class GameManager : MonoBehaviour {
 		Vector3 v = GameObject.Find ("Persistence").GetComponent<Persistence> ().nextPosition; // Spawning Talf to right position
 		Talf.transform.position = v;
 		questManager = GameObject.Find ("QuestManager").GetComponent<QuestManager>();
-		useCamera = false;
+
+        if (GameObject.Find("Persistence").GetComponent<Persistence>().initializeQuests)
+        {
+            GameObject.Find("Persistence").GetComponent<Persistence>().initializeQuests = false;
+
+            // The creation of the quest here is temporary
+            List<string> objectives = new List<string>();
+            objectives.Add("Q1");
+            objectives.Add("Q2");
+            objectives.Add("Q3");
+            questManager.createNewQuest("Quest", objectives);
+        }
+
+        useCamera = false;
 		cameraFrame.SetActive (useCamera);
 	}
 
 	// Update is called once per frame
 	void Update () {
+        if (GameObject.Find("Persistence").GetComponent<Persistence>().receiveQuests)
+        {
+            questManager.changeObjectiveStatus("Q1", GameObject.Find("Persistence").GetComponent<Persistence>().q1);
+            questManager.changeObjectiveStatus("Q2", GameObject.Find("Persistence").GetComponent<Persistence>().q2);
+            questManager.changeObjectiveStatus("Q3", GameObject.Find("Persistence").GetComponent<Persistence>().q3);
+        }
 
-		if (Input.GetKeyDown (KeyCode.C)) {
+        if (GameObject.Find("Persistence").GetComponent<Persistence>().q1)
+        {
+            GameObject.Find("Objective 1").GetComponent<Text>().color = new Color(1f, 1f, 1f, 0.5f);
+        }
+
+        if (GameObject.Find("Persistence").GetComponent<Persistence>().q2)
+        {
+            GameObject.Find("Objective 2").GetComponent<Text>().color = new Color(1f, 1f, 1f, 0.5f);
+        }
+
+        if (GameObject.Find("Persistence").GetComponent<Persistence>().q3)
+        {
+            GameObject.Find("Objective 3").GetComponent<Text>().color = new Color(1f, 1f, 1f, 0.5f);
+        }
+
+        if (Input.GetKeyDown (KeyCode.C)) {
 			useCamera = !useCamera;
 			photo.gameObject.SetActive (useCamera);
 			main.gameObject.SetActive (!useCamera);
@@ -51,13 +86,22 @@ public class GameManager : MonoBehaviour {
 				Q1Point.GetComponent<OnScreenMessageTrigger>().displayMessage("Congratulations! You completed the strainght lake objective");
 				print ("Congratulations! You completed the strainght lake objective");
 				print (questManager.getPercentageFinished ());
-			}else if (Vector3.Distance(Talf.transform.position, Q2Point.transform.position) < 3)
+
+                GameObject.Find("Objective 1").GetComponent<Text>().color = new Color(1f, 1f, 1f, 0.5f);
+                GameObject.Find("Persistence").GetComponent<Persistence>().persuate += 34;
+                GameObject.Find("Persistence").GetComponent<Persistence>().q1 = true;
+            }
+            else if (Vector3.Distance(Talf.transform.position, Q2Point.transform.position) < 3)
             {
                 questManager.changeObjectiveStatus("Q2", true);
                 FindObjectOfType<MessageBoxManager>().EndOnScreenMessage();                 // Hides any on screen messages
                 Q2Point.GetComponent<OnScreenMessageTrigger>().displayMessage("Congratulations! You completed the strainght road objective");
                 print("Congratulations! You completed the strainght road objective");
                 print(questManager.getPercentageFinished());
+
+                GameObject.Find("Objective 2").GetComponent<Text>().color = new Color(1f, 1f, 1f, 0.5f);
+                GameObject.Find("Persistence").GetComponent<Persistence>().persuate += 33;
+                GameObject.Find("Persistence").GetComponent<Persistence>().q2 = true;
             }
 
             print("HERE "+Vector3.Distance(Talf.transform.position, Q2Point.transform.position));
@@ -73,7 +117,11 @@ public class GameManager : MonoBehaviour {
 			FindObjectOfType<MessageBoxManager>().EndOnScreenMessage(); 			// Hides any on screen messages
 			q3Leader.GetComponent<OnScreenMessageTrigger>().displayMessage("Congratulations! You completed the citizens objective");
 			dm.dialogueBegan = false;
-		}
-	}
+
+            GameObject.Find("Objective 1").GetComponent<Text>().color = new Color(1f, 1f, 1f, 0.5f);
+            GameObject.Find("Persistence").GetComponent<Persistence>().persuate += 33;
+            GameObject.Find("Persistence").GetComponent<Persistence>().q3 = true;
+        }
+    }
 		
 }

@@ -12,31 +12,24 @@ public class CentralIntelligence : MonoBehaviour {
 	public GameObject[] parkCitizens;
 	public GameObject[] parkDP;
 	public GameObject[] cars;
-	public QuestManager questManager;
 	public AgentFSM states;
 	private Vector3 destinationPoint;
 	private NavMeshAgent meshAgent;
 	private int timeInGame;
 	private int carsLeft;
 	private Transform startMarker;
+    public QuestManager questManager;
 
 
 	// Use this for initialization
 	void Start () {
-		questManager = GameObject.Find ("QuestManager").GetComponent<QuestManager> ();
-		// The creation of the quest here is temporary
-		List<string> objectives = new List<string> ();
-		objectives.Add ("Q1");
-		objectives.Add ("Q2");
-		objectives.Add ("Q3");
-		questManager.createNewQuest ("Quest", objectives);
 		timeInGame = 1;
 		carsLeft = 0;
 		startMarker = GameObject.Find ("StartMarker").GetComponent<Transform> ();
 		// Set Destination points for citizens
 		citizenDP = GameObject.FindGameObjectsWithTag ("DestinationPoint");
 		parkDP = GameObject.FindGameObjectsWithTag ("ParkDP");
-
+        questManager = GameObject.Find("QuestManager").GetComponent<QuestManager>();
 	}
 
 	// Spanws a new agent at x,y,z
@@ -83,7 +76,7 @@ public class CentralIntelligence : MonoBehaviour {
 		//print (timeInGame);
 
 		// Normal Time Spawn
-		if ((timeInGame % 5000 == 0) && timeInGame < 20000) 
+		if ((timeInGame % 50 == 0) && timeInGame < 20000) 
 		{
 			spawnAgent (-98,(float)0.8333,44);
 		}

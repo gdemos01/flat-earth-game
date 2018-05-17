@@ -20,8 +20,18 @@ public class MunicipalityManager : MonoBehaviour {
     {
         if(dialogueManager.dialogueBegan && dialogueManager.dialogueFinishedEntierly)
         {
-            GameObject.Find("Persistence").GetComponent<Persistence>().gameFinished = true;
-            StartCoroutine(LoadScene());
+            if (GameObject.Find("Persistence").GetComponent<Persistence>().finishedQuests)
+            {
+                GameObject.Find("Persistence").GetComponent<Persistence>().gameFinished = true;
+                StartCoroutine(LoadScene());
+            }
+            else if(!GameObject.Find("Persistence").GetComponent<Persistence>().initializeQuests)
+            {
+                // initialize quests
+                GameObject.Find("Persistence").GetComponent<Persistence>().initializeQuests = true;
+                GameObject.Find("Persistence").GetComponent<Persistence>().receiveQuests = true;
+                GameObject.Find("Talf").GetComponent<Player>().questInitAudio.Play();
+            }
         }
     }
 

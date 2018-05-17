@@ -25,6 +25,11 @@ public class QuestManager : MonoBehaviour {
 	// Returns the percentage finished for the current quest
 	public int getPercentageFinished()
 	{
+        if(this.objectiveStatuses == null)
+        {
+            return 0;
+        }
+
 		int finished =0;
 		foreach( bool status in this.objectiveStatuses)
 		{

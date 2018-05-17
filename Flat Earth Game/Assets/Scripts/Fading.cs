@@ -33,4 +33,10 @@ public class Fading : MonoBehaviour {
 	void OnLoadCallback(Scene scene, LoadSceneMode sceneMode){
 		BeginFade (-1);
 	}
+
+    public float BeginDynamicFade(int direction, float fSpeed)
+    {
+        fadeDir = direction;
+        return fSpeed;
+    }
 }

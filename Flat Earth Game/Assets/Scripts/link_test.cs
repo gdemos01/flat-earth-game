@@ -39,7 +39,13 @@ public class link_test : MonoBehaviour {
 				yield return new WaitForSeconds (fadeTime);
 				SceneManager.LoadScene (3);
 			} else {
-				if (door == 1)
+                if (GameObject.Find("Persistence").GetComponent<Persistence>().receiveQuests)
+                {
+                    GameObject.Find("Persistence").GetComponent<Persistence>().initializeQuests = true;
+                }
+
+
+                if (door == 1)
 				{
 					GameObject.Find ("Persistence").GetComponent<Persistence> ().nextPosition = new Vector3 (16.56f, 0.02f,  -12.9f);
                     float fadeTime = GetComponent<Fading>().BeginFade(1);

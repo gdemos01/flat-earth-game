@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
@@ -20,6 +22,10 @@ public class Player : MonoBehaviour
 
     AudioSource _audioSource;
     public AudioClip _audioClip;
+    public AudioSource diedAudio;
+    public AudioSource questInitAudio;
+
+    public GameObject youDiedPanel;
 
     private void Awake()
     {
@@ -39,6 +45,9 @@ public class Player : MonoBehaviour
     {
 		health.CurrentVal = GameObject.Find ("Persistence").GetComponent<Persistence> ().health;
 		persuate.CurrentVal = GameObject.Find ("Persistence").GetComponent<Persistence> ().persuate;
+
+        // FOR DEBUG
+        /*
         if (Input.GetKeyDown(KeyCode.U))
         {
             health.CurrentVal += 10;
@@ -58,13 +67,13 @@ public class Player : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.M))
         {
             persuate.CurrentVal += 10;
-        }
+        }*/
 
     }
 
     void LateUpdate()
     {
-        if (Input.GetKeyDown(KeyCode.Q))
+        if (Input.GetKeyDown(KeyCode.Q) && GameObject.Find("Persistence").GetComponent<Persistence>().receiveQuests)
         {
             if (isShown)
             {
@@ -95,7 +104,21 @@ public class Player : MonoBehaviour
                 r.enabled = false;
             _audioSource.PlayOneShot(_audioClip);
 
-            Destroy(hit, _audioClip.length);
+            GameObject.Find("Persistence").GetComponent<Persistence>().RespawnPlayer();
+            //Destroy(hit, _audioClip.length);
+            //set active
+            youDiedPanel.SetActive(true);
+
+            StartCoroutine(PlayerDied());
+            
         }
+    }
+
+    IEnumerator PlayerDied()
+    {
+        diedAudio.Play();
+        float fadeTime = GetComponent<Fading>().BeginDynamicFade(1, 0.01f);
+        yield return new WaitForSeconds(5);
+        SceneManager.LoadScene(1);
     }
 }

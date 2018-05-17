@@ -12,9 +12,13 @@ public class Persistence : MonoBehaviour {
 	public Vector3 nextPosition;
 	public bool trainingFinished;
 
+    public bool q1, q2, q3, receiveQuests;
+
     public bool finishedQuests;
 
     public bool gameFinished;
+
+    public bool initializeQuests;
 
 	void Awake()
 	{
@@ -27,8 +31,31 @@ public class Persistence : MonoBehaviour {
 			nextPosition = playerPosition.position;
 			DontDestroyOnLoad(this.gameObject);
 			created = true;
-            finishedQuests = true; //change
+            finishedQuests = false;
             gameFinished = false;
+            initializeQuests = false;
+            q1 = false;
+            q2 = false;
+            q3 = false;
+            receiveQuests = false;
 		}
 	}
+
+    public void RespawnPlayer()
+    {
+        trainingFinished = false;
+        playerPosition = GameObject.Find("Talf").transform;
+        health = 100;
+        persuate = 0;
+        nextPosition = new Vector3(26.03f, 6.9f, 9.29f);
+        DontDestroyOnLoad(this.gameObject);
+        created = true;
+        finishedQuests = false;
+        gameFinished = false;
+        initializeQuests = false;
+        q1 = false;
+        q2 = false;
+        q3 = false;
+        receiveQuests = false;
+    }
 }
