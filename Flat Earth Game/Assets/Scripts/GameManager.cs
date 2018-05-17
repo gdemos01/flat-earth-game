@@ -24,6 +24,9 @@ public class GameManager : MonoBehaviour {
         Q2Point = GameObject.Find("Q2Point");
         q3Leader = GameObject.Find ("Leader");
 		Talf = GameObject.Find ("Talf");
+
+		Vector3 v = GameObject.Find ("Persistence").GetComponent<Persistence> ().nextPosition; // Spawning Talf to right position
+		Talf.transform.position = v;
 		questManager = GameObject.Find ("QuestManager").GetComponent<QuestManager>();
 		useCamera = false;
 		cameraFrame.SetActive (useCamera);
