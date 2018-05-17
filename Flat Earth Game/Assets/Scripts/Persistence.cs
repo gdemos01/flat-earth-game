@@ -12,6 +12,10 @@ public class Persistence : MonoBehaviour {
 	public Vector3 nextPosition;
 	public bool trainingFinished;
 
+    public bool finishedQuests;
+
+    public bool gameFinished;
+
 	void Awake()
 	{
 		if (!created)
@@ -23,6 +27,8 @@ public class Persistence : MonoBehaviour {
 			nextPosition = playerPosition.position;
 			DontDestroyOnLoad(this.gameObject);
 			created = true;
+            finishedQuests = true; //change
+            gameFinished = false;
 		}
 	}
 }

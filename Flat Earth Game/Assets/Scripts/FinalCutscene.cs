@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class FinalCutscene : MonoBehaviour {
 
@@ -13,17 +14,25 @@ public class FinalCutscene : MonoBehaviour {
 	private bool initialized;
 	public AudioSource halo;
 
+    private bool cutSceneFinished;
+
 	// Use this for initialization
 	void Start () {
 		initialized = false;
-		finishedGame = false;
-	}
+		finishedGame = GameObject.Find("Persistence").GetComponent<Persistence>().gameFinished;
+        cutSceneFinished = false;
+    }
 
 	// Update is called once per frame
 	void Update () {
-		if (finishedGame) {
+		if (finishedGame && !cutSceneFinished) {
+
+            //stop basic music
+            GameObject.Find("Talf").GetComponent<AudioSource>().Stop();
+
 			if (!initialized) {
 				halo.Play ();
+
 				startMarker = GameObject.Find ("earth").GetComponent<Transform> ();
 				endMarker = GameObject.Find ("space").GetComponent<Transform> ();
 				startTime = Time.time;
@@ -31,15 +40,36 @@ public class FinalCutscene : MonoBehaviour {
 				transform.Rotate (90, 0, 0);
 				initialized = true;
 			}
-			speed = speed + speed * 0.001f;
-			print (speed);
-			float distCovered = (Time.time - startTime) * speed;
+
+            speed = speed + speed * 0.001f;
+
+            float distCovered = (Time.time - startTime) * speed;
 			float fracJourney = distCovered / journeyLength;
 			transform.position = Vector3.Lerp (startMarker.position, endMarker.position, fracJourney);
-		} else {
-			if (Input.GetKeyDown (KeyCode.F)) {
-				finishedGame = true;
-			}
+            
+            if(transform.position == endMarker.position)
+            {
+                StartCoroutine(FadeOut(halo, 0.9f));
+                cutSceneFinished = true;
+            }
 		}
 	}
+
+    public static IEnumerator FadeOut(AudioSource audioSource, float FadeTime)
+    {
+        float startVolume = audioSource.volume;
+
+        while (audioSource.volume > 0)
+        {
+            audioSource.volume -= startVolume * Time.deltaTime / FadeTime;
+
+            yield return null;
+        }
+
+        audioSource.Stop();
+        audioSource.volume = startVolume;
+        float fadeTime = GameObject.Find("Main Camera").GetComponent<Fading>().BeginFade(1);
+        yield return new WaitForSeconds(fadeTime);
+        SceneManager.LoadScene(0);
+    }
 }
