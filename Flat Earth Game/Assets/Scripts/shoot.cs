@@ -41,7 +41,7 @@ public class shoot : MonoBehaviour
             print("I'm looking at " + hit.transform.name);
         else
             print("I'm looking at nothing!");*/
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0) && Time.timeScale == 1f)
         {
             horizontal = Input.GetAxis("Horizontal");
             vertical = Input.GetAxis("Vertical");

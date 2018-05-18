@@ -95,14 +95,14 @@ public class CentralIntelligence : MonoBehaviour {
 		}
 
 		// Moderate Quest Spawn
-		if (questManager.getPercentageFinished () >= 34 && questManager.getPercentageFinished () < 66 && (timeInGame % 6000 == 0)) 
+		if (questManager.getPercentageFinished () >= 34 && questManager.getPercentageFinished () <= 67 && (timeInGame % 6000 == 0)) 
 		{
 			spawnAgent (-97, (float)0.8333, 43);
 			spawnAgent (-98, (float)0.8333, 44);
 		}
 
 		// Aggresive Quest Spawn
-		if (questManager.getPercentageFinished () >= 67 && (timeInGame % 6000 == 0)) 
+		if (questManager.getPercentageFinished () > 67 && (timeInGame % 6000 == 0)) 
 		{
 			spawnAgent (-96, (float)0.8333, 42);
 			spawnAgent (-97, (float)0.8333, 43);

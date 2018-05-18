@@ -35,14 +35,17 @@ public class FreeCameraLook : Pivot {
 	// Update is called once per frame
  protected override	void Update ()
 	{
-		base.Update();
+        if (Time.timeScale == 1f)
+        {
+            base.Update();
 
-		HandleRotationMovement();
+            HandleRotationMovement();
 
-		if (lockCursor && Input.GetMouseButtonUp (0))
-		{
-            Cursor.lockState = CursorLockMode.Confined;
-		}
+            if (lockCursor && Input.GetMouseButtonUp(0))
+            {
+                Cursor.lockState = CursorLockMode.Confined;
+            }
+        }
 	}
 
 	void OnDisable()
