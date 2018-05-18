@@ -34,18 +34,21 @@ public class AgentFSM : MonoBehaviour
         else
         {
             Attack();
-            shooti++;
-            if (shooti - 100 >= System.Int32.MaxValue) { shooti = 0; }
-            if ((shooti % 25) == 0)
+            if (Time.timeScale == 1f)
             {
-                // Shooting
-				GameObject bullet = (GameObject)Instantiate(bulletPrefab, bulletSpawn.position, Quaternion.LookRotation(new Vector3(90,0,0)));
-                bullet.GetComponent<Rigidbody>().velocity = bullet.transform.forward * 6f;
-                Vector3 v = bullet.GetComponent<Rigidbody>().velocity.normalized;   //used for calulating the range
+                shooti++;
+                if (shooti - 100 >= System.Int32.MaxValue) { shooti = 0; }
+                if ((shooti % 25) == 0)
+                {
+                    // Shooting
+                    GameObject bullet = (GameObject)Instantiate(bulletPrefab, bulletSpawn.position, Quaternion.LookRotation(new Vector3(90, 0, 0)));
+                    bullet.GetComponent<Rigidbody>().velocity = bullet.transform.forward * 6f;
+                    Vector3 v = bullet.GetComponent<Rigidbody>().velocity.normalized;   //used for calulating the range
 
-                float t = 1 / ((Mathf.Abs(v.x) + Mathf.Abs(v.y) + Mathf.Abs(v.z)) / 3); //destroy bullet after some time
+                    float t = 1 / ((Mathf.Abs(v.x) + Mathf.Abs(v.y) + Mathf.Abs(v.z)) / 3); //destroy bullet after some time
 
-                Destroy(bullet, t);
+                    Destroy(bullet, t);
+                }
             }
         }
     } 

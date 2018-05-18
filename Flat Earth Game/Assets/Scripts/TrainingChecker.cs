@@ -34,7 +34,7 @@ public class TrainingChecker : MonoBehaviour {
             {
 				if (GameObject.Find ("Persistence").GetComponent<Persistence> ().trainingFinished == false) {					
 					//display a message that player didn't complete the training session
-					GetComponent<OnScreenMessageTrigger> ().displayMessage ("You cannot exit the HeadQuarters if you haven't finish the training.");
+					GetComponent<OnScreenMessageTrigger> ().displayMessage ("You cannot exit the HeadQuarters if you haven't finished the training.");
 				} else {
 					GetComponent<OnScreenMessageTrigger>().displayMessage("Training Completed! Now you can exit the HeadQuarters!");
 				}

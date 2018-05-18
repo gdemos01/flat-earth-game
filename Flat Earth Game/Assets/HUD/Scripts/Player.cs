@@ -104,6 +104,7 @@ public class Player : MonoBehaviour
                 r.enabled = false;
             _audioSource.PlayOneShot(_audioClip);
 
+            transform.position = new Vector3(transform.position.x, 500, transform.position.z);
             GameObject.Find("Persistence").GetComponent<Persistence>().RespawnPlayer();
             //Destroy(hit, _audioClip.length);
             //set active
@@ -118,7 +119,7 @@ public class Player : MonoBehaviour
     {
         diedAudio.Play();
         float fadeTime = GetComponent<Fading>().BeginDynamicFade(1, 0.01f);
-        yield return new WaitForSeconds(5);
+        yield return new WaitForSeconds(10);
         SceneManager.LoadScene(1);
     }
 }
