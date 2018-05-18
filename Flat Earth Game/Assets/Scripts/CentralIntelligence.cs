@@ -23,7 +23,6 @@ public class CentralIntelligence : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		timeInGame = 1;
 		carsLeft = 0;
 		startMarker = GameObject.Find ("StartMarker").GetComponent<Transform> ();
 		// Set Destination points for citizens
@@ -40,6 +39,10 @@ public class CentralIntelligence : MonoBehaviour {
 		
 	// Update is called once per frame
 	void Update () {
+
+
+		timeInGame = GameObject.Find ("Persistence").GetComponent<Persistence> ().timeInGame;
+		print (timeInGame);
 
 		// Citizens 
 		if (timeInGame % 200 == 0) {
@@ -72,11 +75,9 @@ public class CentralIntelligence : MonoBehaviour {
 		}
 
 		// RULE BASED A.I.
-		timeInGame++;
-		//print (timeInGame);
 
 		// Normal Time Spawn
-		if ((timeInGame % 50 == 0) && timeInGame < 20000) 
+		if ((timeInGame % 5000 == 0) && timeInGame < 20000) 
 		{
 			spawnAgent (-98,(float)0.8333,44);
 		}

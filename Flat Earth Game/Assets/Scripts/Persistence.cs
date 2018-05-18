@@ -10,6 +10,7 @@ public class Persistence : MonoBehaviour {
 	public int persuate;
 	public Transform playerPosition;
 	public Vector3 nextPosition;
+	public int timeInGame;
 	public bool trainingFinished;
 
     public bool q1, q2, q3, receiveQuests;
@@ -37,8 +38,19 @@ public class Persistence : MonoBehaviour {
             q1 = false;
             q2 = false;
             q3 = false;
+			timeInGame = 1;
             receiveQuests = false;
 		}
+	}
+
+	void Update(){
+		// Finished All Quests
+		if (q1 && q2 && q3) {
+			finishedQuests = true;
+		}
+
+		// Time in Game in Frames
+		timeInGame+=1;
 	}
 
     public void RespawnPlayer()
@@ -57,5 +69,6 @@ public class Persistence : MonoBehaviour {
         q2 = false;
         q3 = false;
         receiveQuests = false;
+		timeInGame = 0;
     }
 }

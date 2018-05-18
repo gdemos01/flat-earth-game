@@ -23,6 +23,7 @@ public class MunicipalityManager : MonoBehaviour {
             if (GameObject.Find("Persistence").GetComponent<Persistence>().finishedQuests)
             {
                 GameObject.Find("Persistence").GetComponent<Persistence>().gameFinished = true;
+				GameObject.Find ("Persistence").GetComponent<Persistence> ().RespawnPlayer ();
                 StartCoroutine(LoadScene());
             }
             else if(!GameObject.Find("Persistence").GetComponent<Persistence>().initializeQuests)
