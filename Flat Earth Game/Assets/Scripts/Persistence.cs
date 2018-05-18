@@ -67,6 +67,6 @@ public class Persistence : MonoBehaviour {
         q2 = false;
         q3 = false;
         receiveQuests = false;
-		timeInGame = 0;
+		timeInGame = 1;
     }
 }
