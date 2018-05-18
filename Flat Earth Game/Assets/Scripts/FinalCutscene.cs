@@ -25,6 +25,8 @@ public class FinalCutscene : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
+
+		//print ("game "+finishedGame +" cut "+cutSceneFinished);
 		if (finishedGame && !cutSceneFinished) {
 
             //stop basic music
@@ -70,6 +72,7 @@ public class FinalCutscene : MonoBehaviour {
         audioSource.volume = startVolume;
         float fadeTime = GameObject.Find("Main Camera").GetComponent<Fading>().BeginFade(1);
         yield return new WaitForSeconds(fadeTime);
+		GameObject.Find ("Persistence").GetComponent<Persistence> ().RespawnPlayer ();
         SceneManager.LoadScene(0);
     }
 }

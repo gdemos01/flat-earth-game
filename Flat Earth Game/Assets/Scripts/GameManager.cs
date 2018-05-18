@@ -104,7 +104,7 @@ public class GameManager : MonoBehaviour {
                 GameObject.Find("Persistence").GetComponent<Persistence>().q2 = true;
             }
 
-            print("HERE "+Vector3.Distance(Talf.transform.position, Q2Point.transform.position));
+            //print("HERE "+Vector3.Distance(Talf.transform.position, Q2Point.transform.position));
             shutter.Play();
         }
 

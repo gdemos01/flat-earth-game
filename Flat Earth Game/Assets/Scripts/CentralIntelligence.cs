@@ -42,7 +42,7 @@ public class CentralIntelligence : MonoBehaviour {
 
 
 		timeInGame = GameObject.Find ("Persistence").GetComponent<Persistence> ().timeInGame;
-		print (timeInGame);
+		//print (timeInGame);
 
 		// Citizens 
 		if (timeInGame % 200 == 0) {

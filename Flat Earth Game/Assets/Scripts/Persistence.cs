@@ -14,7 +14,6 @@ public class Persistence : MonoBehaviour {
 	public bool trainingFinished;
 
     public bool q1, q2, q3, receiveQuests;
-
     public bool finishedQuests;
 
     public bool gameFinished;
@@ -47,8 +46,7 @@ public class Persistence : MonoBehaviour {
 		// Finished All Quests
 		if (q1 && q2 && q3) {
 			finishedQuests = true;
-		}
-
+		} 
 		// Time in Game in Frames
 		timeInGame+=1;
 	}

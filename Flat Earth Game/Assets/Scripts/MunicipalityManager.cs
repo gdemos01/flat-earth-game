@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class MunicipalityManager : MonoBehaviour {
 
@@ -18,12 +19,26 @@ public class MunicipalityManager : MonoBehaviour {
 
     void Update()
     {
+		if (GameObject.Find("Persistence").GetComponent<Persistence>().q1)
+		{
+			GameObject.Find("Objective 1").GetComponent<Text>().color = new Color(1f, 1f, 1f, 0.5f);
+		}
+
+		if (GameObject.Find("Persistence").GetComponent<Persistence>().q2)
+		{
+			GameObject.Find("Objective 2").GetComponent<Text>().color = new Color(1f, 1f, 1f, 0.5f);
+		}
+
+		if (GameObject.Find("Persistence").GetComponent<Persistence>().q3)
+		{
+			GameObject.Find("Objective 3").GetComponent<Text>().color = new Color(1f, 1f, 1f, 0.5f);
+		}
+
         if(dialogueManager.dialogueBegan && dialogueManager.dialogueFinishedEntierly)
         {
             if (GameObject.Find("Persistence").GetComponent<Persistence>().finishedQuests)
             {
                 GameObject.Find("Persistence").GetComponent<Persistence>().gameFinished = true;
-				GameObject.Find ("Persistence").GetComponent<Persistence> ().RespawnPlayer ();
                 StartCoroutine(LoadScene());
             }
             else if(!GameObject.Find("Persistence").GetComponent<Persistence>().initializeQuests)
